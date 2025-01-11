@@ -18,6 +18,7 @@ import static org.junit.Assert.fail;
 public class Methods {
     private static final Logger logger = LogManager.getLogger();
     public static Map<String, String> userVariables = new HashMap<>();
+    public static Map<String, String> userVariablesCompare = new HashMap<>();
 
     /**
      * Check if an element is present on the page.
@@ -47,7 +48,7 @@ public class Methods {
      * @param buttonName the name of the button to click
      */
     public static void clickOnButton(String buttonName) {
-        WaitUtils.waitElementInteractableWithClicking(findInputLabelledBy(buttonName));
+            WaitUtils.waitElementInteractableWithClicking(findInputLabelledBy(buttonName));
     }
 
     /**
@@ -104,7 +105,10 @@ public class Methods {
      */
     public void saveTheVariable(String key, String userVariable) {
         key = key.replace("$", "");
-        userVariables.put(key, userVariable);
+        if (key.contains("API"))
+            userVariablesCompare.put(key.replace("API", ""), userVariable);
+        else
+            userVariables.put(key, userVariable);
     }
 
     /**
@@ -114,8 +118,13 @@ public class Methods {
      */
     public String getTheVariable(String key) {
         key = key.replace("$", "");
+        if (key.contains("API"))
+            return userVariablesCompare.get(key.replace("API", ""));
         return userVariables.get(key);
     }
+
+    public Map<String, String> getCompareVariables() { return userVariablesCompare; }
+    public Map<String, String> getUserVariables() { return userVariables; }
 
     /**
      * Get the text from the result
@@ -125,13 +134,8 @@ public class Methods {
      */
     public String getTextFromResult(String operator, String... numbers) {
         String resultXpath = "//span[contains(.,normalize-space(\"=\"))]";
-        try {
-            return findElementByXpath(resultXpath).getText().replace("=", "").replace(" ", "");
-        } catch (NoSuchElementException e) {
-            logger.error("Equals clicked but there's and API error. Results manually given: " + numbers[0] + operator + numbers[1] + " = ");
-            clickOnButton("AC");
-            return calculateWithStringOperator(operator, numbers).replace(".", ",");
-        }
+        return findElementByXpath(resultXpath).getText().replace("=", "").replace(" ", "");
+
     }
 
     /**
@@ -218,8 +222,11 @@ public class Methods {
                 break;
             case "=": {
                 clickOnButton("=");
-                WaitUtils.waitForVisibility(By.xpath("//div[@role=\"progressbar\"]"));
-                WaitUtils.waitForInvisibility(By.xpath("//div[@role=\"progressbar\"]"));
+                try {
+                    WaitUtils.waitForVisibility(By.xpath("//span[contains(.,normalize-space('='))]"));
+                }catch (TimeoutException e){
+                    fail("Equals clicked but result won't show up. "+e.getMessage());
+                }
             }
             break;
         }
@@ -246,7 +253,15 @@ public class Methods {
         if (numbers.length < 2 && !doesElementExist(By.xpath("//span[contains(.,normalize-space(\"=\"))]")))
             Assertions.fail("You didn't click any number on page.");
         turnNumberToDigitsAndClick(operator, numbers);
-        return getTextFromResult(operator, numbers);
+        System.out.print("UI Calculator Result: ");
+        for (int i = 0; i< numbers.length; i++) {
+            if (i == numbers.length - 1)
+                operator = "=";
+            System.out.print(numbers[i] + " " + operator + " ");
+        }
+        String result = getTextFromResult(operator, numbers);
+        System.out.println(result);
+        return result;
     }
 
 }
