@@ -1,7 +1,6 @@
 package com.testinium.api.app;
 
 import com.testinium.api.services.CalculatorServices;
-import com.testinium.utils.Methods;
 import io.cucumber.datatable.DataTable;
 
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.testinium.api.models;
 
-import com.testinium.utils.Methods;
-import com.testinium.utils.Resources;
+
+
 import io.restassured.http.Header;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
