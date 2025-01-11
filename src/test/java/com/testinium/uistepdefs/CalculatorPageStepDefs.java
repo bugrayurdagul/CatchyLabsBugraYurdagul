@@ -1,4 +1,4 @@
-package com.testinium.stepdefs;
+package com.testinium.uistepdefs;
 
 import com.testinium.Pages;
 import io.cucumber.datatable.DataTable;
@@ -23,7 +23,6 @@ public class CalculatorPageStepDefs {
     @Then("Calculate budget with the following values and save it to user variable:")
     public void calculateBudget(DataTable dataTable) {
         pages.calculatorPage().calculateBudget(dataTable);
-
     }
 
     @Then("Calculate PMT with following rate and payment periods then save the minimum amount to pay")
@@ -40,8 +39,8 @@ public class CalculatorPageStepDefs {
 
 
     @Then("Calculate daily expenses with {string} TL meal, {string} TL transportation and {string} TL coffee and save it to {string} user variable")
-    public void calculateDailyExpenses(String meal, String trasportation, String coffee, String userVariable) {
-        pages.calculatorPage().calculateDailyExpenses(meal, trasportation, coffee, userVariable);
+    public void calculateDailyExpenses(String meal, String transportation, String coffee, String userVariable) {
+        pages.calculatorPage().calculateDailyExpenses(meal, transportation, coffee, userVariable);
     }
 
     @Then("Calculate exchange rate with {string} TL to {string} and save it to {string} user variable")

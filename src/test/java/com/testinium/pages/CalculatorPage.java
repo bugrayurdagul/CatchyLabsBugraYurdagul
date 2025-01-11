@@ -2,7 +2,9 @@ package com.testinium.pages;
 
 import com.testinium.utils.Methods;
 import com.testinium.utils.Driver;
+import com.testinium.utils.WaitUtils;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class CalculatorPage extends Methods {
     public void calculateInterestRate(String year, String rate, String money, String userVariable) {
         String result = getResult("*", getResult("+", getResult("*", year, rate), year), money);
         saveTheVariable(userVariable, result);
+        System.out.println(userVariables);
     }
 
     /**
@@ -40,7 +43,7 @@ public class CalculatorPage extends Methods {
         for (Map<String, String> columns : rows) {
             result = getResult("-", columns.get("Income"), columns.get("Expense"));
             System.out.println(result);
-            saveTheVariable("budget" + i, result);
+            saveTheVariable("Budget" + (i+1), result);
             i++;
         }
         System.out.println(userVariables);
@@ -73,6 +76,8 @@ public class CalculatorPage extends Methods {
                 tempResult3 = getResult("*", tempResult2, tempResult1);
                 tempResult2 = tempResult3;
                 clickOnButton("AC");
+                WaitUtils.waitForInvisibility(By.xpath("//span[contains(.,normalize-space('='))]"));
+
             }
             numerator = getResult("*", rate, tempResult3);
             denominator = getResult("-", tempResult3, "1");
@@ -99,7 +104,7 @@ public class CalculatorPage extends Methods {
         rate = getResult("/", rate.replace("%", ""), "100");
 
         String result = getResult("*", amount, getResult("+", "1", getResult("*", time, rate)));
-        saveTheVariable(userVariable + "Correct", result);
+        saveTheVariable(userVariable, result);
         System.out.println(userVariables);
 
     }
@@ -114,7 +119,8 @@ public class CalculatorPage extends Methods {
      */
     public void calculateDailyExpenses(String meal, String transportation, String coffee, String userVariable) {
         String result = getResult("+", meal, transportation, coffee);
-        System.out.println(result);
+        saveTheVariable(userVariable, result);
+        System.out.println(userVariables);
 
     }
 
@@ -136,7 +142,7 @@ public class CalculatorPage extends Methods {
             rate = "36,50";
         }
         String result = (getResult("*", getResult("/", lira, rate), getResult("-", "1", fee)));
-        System.out.println(result);
-        saveTheVariable(exchange + "Value", result);
+        saveTheVariable(userVariable, result);
+        System.out.println(userVariables);
     }
 }
