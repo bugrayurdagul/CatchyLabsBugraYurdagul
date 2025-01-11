@@ -2,7 +2,6 @@ package com.testinium.stepdefs;
 
 import com.testinium.Pages;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 
 public class LoginPageStepDefs {
 

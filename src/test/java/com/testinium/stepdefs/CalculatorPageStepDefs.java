@@ -1,14 +1,12 @@
 package com.testinium.stepdefs;
 
 import com.testinium.Pages;
-import com.testinium.api.services.AuthServices;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class CalculatorPageStepDefs {
-    AuthServices authServices = new AuthServices();
     Pages pages = new Pages();
 
     @ParameterType("year|month")

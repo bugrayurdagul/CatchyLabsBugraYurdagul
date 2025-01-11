@@ -3,13 +3,10 @@ package com.testinium.pages;
 import com.testinium.utils.Methods;
 import com.testinium.utils.Driver;
 import io.cucumber.datatable.DataTable;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class CalculatorPage extends Methods {
 
