@@ -1,4 +1,4 @@
-package com.testinium.stepdefs;
+package com.testinium.uistepdefs;
 
 import com.testinium.Pages;
 import io.cucumber.java.en.Given;
