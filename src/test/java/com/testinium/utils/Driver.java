@@ -44,6 +44,7 @@ public class Driver {
 				case "firefox":
 					FirefoxOptions ffOptions = new FirefoxOptions();
 					ffOptions.addPreference("browser.safebrowsing.enabled", false);
+					ffOptions.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
 					driver = new FirefoxDriver(ffOptions);
 					driver.manage().window().maximize();
 					break;
