@@ -1,5 +1,5 @@
 {
-  "browser": "firefox",
+  "browser": "chromeHeadless",
   "url": "https://catchylabs-webclient.testinium.com/",
   "api-url": "https://catchylabs-api.testinium.com/api/v1",
   "short-wait": 10

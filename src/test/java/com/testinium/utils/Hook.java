@@ -41,7 +41,8 @@ public class Hook {
             byte[] image = takesScreenshot.getScreenshotAs(OutputType.BYTES);
             scenario.attach(image, "image/png", "Fail Screenshot");
         }
-
+        Methods.userVariables.clear();
+        Methods.userVariablesCompare.clear();
         System.out.println("AFTER");
         duration = (System.nanoTime() - startTime) / 1000000000;
         System.out.println(duration);
