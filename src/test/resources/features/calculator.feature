@@ -71,8 +71,8 @@ Feature: Calculator Feature
 
   @user_calculates_exchange_rate_on_the_calculator_and_verifies_the_result_with_api_call
   Scenario: User calculates exchange rate on the calculator and verifies the result with api call
-    * Calculate exchange rate with API with "36000" TL to "USD" and save it to "$calculatedExchangeRateUSD" user variable
-    * Calculate exchange rate with API with "36000" TL to "EUR" and save it to "$calculatedExchangeRateEUR" user variable
+    * Calculate exchange rate with API with "36000" TL to "USD" and save it to "$APIcalculatedExchangeRateUSD" user variable
+    * Calculate exchange rate with API with "36000" TL to "EUR" and save it to "$APIcalculatedExchangeRateEUR" user variable
     Given Login with "admin.username" username and "admin.password" password
     Then Calculate exchange rate with "36000" TL to "USD" and save it to "$calculatedExchangeRateUSD" user variable
     And Calculate exchange rate with "36000" TL to "EUR" and save it to "$calculatedExchangeRateEUR" user variable
