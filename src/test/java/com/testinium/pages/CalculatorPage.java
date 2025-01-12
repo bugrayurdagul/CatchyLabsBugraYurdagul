@@ -4,6 +4,7 @@ import com.testinium.utils.Methods;
 import com.testinium.utils.Driver;
 import com.testinium.utils.WaitUtils;
 import io.cucumber.datatable.DataTable;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
@@ -144,5 +145,16 @@ public class CalculatorPage extends Methods {
         String result = (getResult("*", getResult("/", lira, rate), getResult("-", "1", fee)));
         saveTheVariable(userVariable, result);
         System.out.println(userVariables);
+    }
+
+    public void makeSureResultIs(String operator, String number1, String number2, String result) {
+        String result1 = getResult(operator, number1, number2);
+        Assert.assertEquals("Calculation was wrong. Expected: " + result + " Actual: " + result1,result,result1);
+    }
+
+    public void divideZero(String operator, String number1, String number2, String message) {
+        turnNumberToDigitsAndClick(operator, number1, number2);
+        if (!doesElementExist(By.xpath("//div[text()='Not a Number']")))
+            Assert.fail("Bad calculation. Zero cannot be divided. This message should be shown: "+message);
     }
 }

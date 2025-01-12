@@ -190,12 +190,20 @@ public class Methods {
 			numberToDigits(numbers[count]);
             count++;
 		}*/
+        String newOperator = "=.";
         for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains("-") && i == 0) {
+                numberToDigits(list.get(i).replace("-", ""));
+                clickOnButton("+/-");
+            }
+
             if (list.size() == 1 || i != 0) {
                 clickOperator(operator);
                 numberToDigits(list.get(i));
-                clickOperator("=");
-            } else
+                if (!(list.get(i).equals("0") && operator.equals("/")))
+                    newOperator = "=";
+                clickOperator(newOperator);
+            } else if (!list.get(i).contains("-"))
                 numberToDigits(list.get(i));
 
         }
@@ -229,6 +237,9 @@ public class Methods {
                 }
             }
             break;
+            case "=.":
+                clickOnButton("=");
+                break;
         }
 
     }

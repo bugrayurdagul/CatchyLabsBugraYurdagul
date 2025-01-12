@@ -81,13 +81,13 @@ public class MicroServices extends CalculatorServices {
         String fee;
         String rate;
         if (exchange.equals("USD")) {
-            fee = "0,002";
-            rate = "33,10";
+            fee = "0.002";
+            rate = "33.10";
         } else {
-            fee = "0,001";
-            rate = "36,50";
+            fee = "0.001";
+            rate = "36.50";
         }
-        String result = calculateWithAPI("subtracts", calculateWithAPI("multiplies", lira, rate), calculateWithAPI("subtracts", "1", fee));
+        String result = calculateWithAPI("subtracts", calculateWithAPI("divides", lira, rate), calculateWithAPI("subtracts", "1", fee));
         methods.saveTheVariable(userVariable, result.replace(".0",""));
         System.out.println(methods.getCompareVariables());
     }

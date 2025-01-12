@@ -11,10 +11,10 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber.json",
                 "html:target/site/cucumber-pretty"
         },
-        tags = "@user_calculates_daily_expenses",
+        tags = "@basic_functions",
         features = {"src/test/resources/features"},
-        glue = {"com.testinium.utils", "com.testinium.stepdefs", "com.testinium.api.steps"}
+        glue = {"com.testinium.utils", "com.testinium.uistepdefs", "com.testinium.api.apistepdefs"}
 )
-public class LocalRunner {
+public class TagRunner {
 
 }

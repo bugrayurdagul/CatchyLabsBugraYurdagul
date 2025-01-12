@@ -10,7 +10,7 @@ public class EndpointStepDefs {
     Calculations calculations = new Calculations();
 
     @ParameterType("Add|Subtract|Multiply|Divide|.*")
-    public String operator(String operator) {
+    public String calculation(String operator) {
         switch (operator) {
             case "Add":
                 operator = "adds";
@@ -30,7 +30,7 @@ public class EndpointStepDefs {
         return operator;
     }
 
-    @Then("{operator} {string} and {string} and make sure response is {int}")
+    @Then("{calculation} {string} and {string} and make sure response is {int}")
     public void calculation(String operator, String number1, String number2, int response) {
         calculations.calculate(operator, number1, number2,response);
 

@@ -3,6 +3,7 @@ package com.testinium.uistepdefs;
 import com.testinium.Pages;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ParameterType;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -12,6 +13,26 @@ public class CalculatorPageStepDefs {
     @ParameterType("year|month")
     public String yearOrMonth(String yearOrMonth) {
         return yearOrMonth;
+    }
+    @ParameterType("Add|Subtract|Multiply|Divide")
+    public String operator(String operator) {
+        switch (operator) {
+            case "Add":
+                operator = "+";
+                break;
+            case "Subtract":
+                operator = "-";
+                break;
+            case "Multiply":
+                operator = "*";
+                break;
+            case "Divide":
+                operator = "/";
+                break;
+            default:
+                break;
+        }
+        return operator;
     }
 
 
@@ -46,5 +67,15 @@ public class CalculatorPageStepDefs {
     @Then("Calculate exchange rate with {string} TL to {string} and save it to {string} user variable")
     public void calculateExchangeRate(String lira, String exchange, String userVariable) {
         pages.calculatorPage().calculateExchangeRate(lira, exchange, userVariable);
+    }
+
+    @And("{operator} {string} and {string} and make sure result is {string}")
+    public void addAndAndMakeSureResultIs(String operator, String number1, String number2, String result) {
+        pages.calculatorPage().makeSureResultIs(operator,number1, number2, result);
+    }
+
+    @And("{operator} {string} and {string} and divide by zero and make sure result is {string}")
+    public void divideByZeroAndMakeSureResultIs(String operator, String number1, String number2, String message) {
+        pages.calculatorPage().divideZero(operator, number1, number2, message);
     }
 }
