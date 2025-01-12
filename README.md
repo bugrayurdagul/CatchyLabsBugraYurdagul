@@ -31,7 +31,7 @@ To install and run the project, follow these steps:
 ### Step 1: Clone the Repository
 
 Clone the Testinium project repository using the following command:
-`git clone https://github.com/your-repo/testinium.git`
+`git clone https://github.com/bugrayurdagul/CatchyLabsBugraYurdagul.git`
 
 ### Step 2: Install Dependencies
 
