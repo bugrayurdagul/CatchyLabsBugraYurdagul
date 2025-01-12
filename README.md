@@ -3,7 +3,7 @@
 ---
 **Attention:** Before reading this document, first go at the end of this document and read the `IMPORTANT NOTE`.
 
-This project is a test automation framework for the CatchyLabs Calculator App using Cucumber and Java.
+This project is a test automation framework for the CatchyLabs Calculator App using Cucumber and Java. It's running on `chromeHeadless` browser. You can change it with following instructions on Installation under Create Test Environment's 3rd step.
 
 ---
 ## Features
@@ -44,7 +44,7 @@ If project build already installed dependencies, you can skip this step.
 
 ### Step 3: Create Test Environment
 
-1. Create a credentials file named `credentials.json` in the `src/test/resources/test_data/credentials.json` directory.
+1. Create a credentials file named `credentials.json` in the `src/test/resources/test_data/` directory.
 
 2. Add the following structure to the `credentials.json` file:
 ```json
@@ -61,6 +61,8 @@ If project build already installed dependencies, you can skip this step.
 ```
 _**Important:**_ Replace `change_this_with_yourusername` and `change_this_with_yourpassword` with your actual username and password and don't delete `unauthorized` section.
 
+3. Change the browser if you want. It comes with `chromeHeadless` default option. You can change it in the file named `configration.json` in the `src/test/resources/test_data/` directory.
+   Change the `"chromeHeadless"` option to `"chrome" or "firefox" or "firefoxHeadles" or "edge" or "edgeHeadless"`.
 ---
 ## Test Runs
 
