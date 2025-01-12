@@ -27,8 +27,7 @@ public class CalculatorServices extends BaseApiTest {
                 .body(calculator)
                 .post("/calculators/"+operator);
         response.then().statusCode(200);
-        System.out.println("API Calculator Result: "+number1 + " " + operator + " " + number2 + " = "
-                + response.getBody().jsonPath().getString("result"));
+        Methods.logger.info("API Calculator Result: "+number1 + " " + operator + " " + number2 + " = " + response.getBody().jsonPath().getString("result"));
         return response.jsonPath().getString("result");
     }
 

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class Methods {
-    private static final Logger logger = LogManager.getLogger();
+    public static final Logger logger = LogManager.getLogger();
     public static Map<String, String> userVariables = new HashMap<>();
     public static Map<String, String> userVariablesCompare = new HashMap<>();
 
@@ -264,14 +264,14 @@ public class Methods {
         if (numbers.length < 2 && !doesElementExist(By.xpath("//span[contains(.,normalize-space(\"=\"))]")))
             Assertions.fail("You didn't click any number on page.");
         turnNumberToDigitsAndClick(operator, numbers);
-        System.out.print("UI Calculator Result: ");
+        String resultString = "UI Calculator Result: ";
         for (int i = 0; i< numbers.length; i++) {
             if (i == numbers.length - 1)
                 operator = "=";
-            System.out.print(numbers[i] + " " + operator + " ");
+            resultString += (numbers[i] + " " + operator + " ");
         }
         String result = getTextFromResult(operator, numbers);
-        System.out.println(result);
+        logger.info(resultString+result);
         return result;
     }
 

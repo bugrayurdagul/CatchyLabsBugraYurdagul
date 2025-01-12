@@ -29,7 +29,7 @@ public class CalculatorPage extends Methods {
     public void calculateInterestRate(String year, String rate, String money, String userVariable) {
         String result = getResult("*", getResult("+", getResult("*", year, rate), year), money);
         saveTheVariable(userVariable, result);
-        System.out.println(userVariables);
+        logger.info("UI Calculator Result: " + userVariables.get(userVariable));
     }
 
     /**
@@ -43,11 +43,11 @@ public class CalculatorPage extends Methods {
         int i = 0;
         for (Map<String, String> columns : rows) {
             result = getResult("-", columns.get("Income"), columns.get("Expense"));
-            System.out.println(result);
+            logger.info("Budget "+(i+1)+":"+result);
             saveTheVariable("Budget" + (i+1), result);
             i++;
         }
-        System.out.println(userVariables);
+        logger.info(userVariables);
 
 
     }
@@ -83,11 +83,11 @@ public class CalculatorPage extends Methods {
             numerator = getResult("*", rate, tempResult3);
             denominator = getResult("-", tempResult3, "1");
             result = getResult("*", principalAmount, getResult("/", numerator, denominator));
-            System.out.println(result);
+            logger.info("PMT" + i + ":" + result);
             saveTheVariable("Loan " + i, result);
             i++;
         }
-        System.out.println(userVariables);
+        logger.info(userVariables);
     }
 
     /**
@@ -106,8 +106,7 @@ public class CalculatorPage extends Methods {
 
         String result = getResult("*", amount, getResult("+", "1", getResult("*", time, rate)));
         saveTheVariable(userVariable, result);
-        System.out.println(userVariables);
-
+        logger.info(userVariables);
     }
 
     /**
@@ -121,7 +120,7 @@ public class CalculatorPage extends Methods {
     public void calculateDailyExpenses(String meal, String transportation, String coffee, String userVariable) {
         String result = getResult("+", meal, transportation, coffee);
         saveTheVariable(userVariable, result);
-        System.out.println(userVariables);
+        logger.info(userVariables);
 
     }
 
@@ -144,7 +143,7 @@ public class CalculatorPage extends Methods {
         }
         String result = (getResult("*", getResult("/", lira, rate), getResult("-", "1", fee)));
         saveTheVariable(userVariable, result);
-        System.out.println(userVariables);
+        logger.info(userVariables);
     }
 
     public void makeSureResultIs(String operator, String number1, String number2, String result) {

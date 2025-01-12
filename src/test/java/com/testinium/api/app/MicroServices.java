@@ -1,6 +1,7 @@
 package com.testinium.api.app;
 
 import com.testinium.api.services.CalculatorServices;
+import com.testinium.utils.Methods;
 import io.cucumber.datatable.DataTable;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public class MicroServices extends CalculatorServices {
         result = calculateWithAPI("adds", result, year);
         result = calculateWithAPI("multiplies", result, money).replace(".0","");
         methods.saveTheVariable(userVariable, result);
-        System.out.println("API Result: " + methods.getTheVariable(userVariable));
+        Methods.logger.info("API Result: " + methods.getTheVariable(userVariable));
+
     }
 
     public void calculateBudgetWithAPI(DataTable dataTable) {
@@ -21,12 +23,12 @@ public class MicroServices extends CalculatorServices {
         int i = 0;
         for (Map<String, String> columns : rows) {
             result = calculateWithAPI("subtracts", columns.get("Income"), columns.get("Expense")).replace(".0","");
-            System.out.println(result);
+            Methods.logger.info(result);
             methods.saveTheVariable("BudgetAPI" + (i+1), result);
             methods.getTheVariable("BudgetAPI" + (i+1));
             i++;
         }
-        System.out.println(methods.getCompareVariables());
+        Methods.logger.info(methods.getCompareVariables());
     }
 
     public void calculatePMTWithAPI(DataTable dataTable) {
@@ -52,11 +54,11 @@ public class MicroServices extends CalculatorServices {
             numerator = calculateWithAPI("multiplies", rate, tempResult3);
             denominator = calculateWithAPI("subtracts", tempResult3, "1");
             result = calculateWithAPI("multiplies", principalAmount, calculateWithAPI("divides", numerator, denominator)).replace(".0","");
-            System.out.println(result);
+            Methods.logger.info(result);
             methods.saveTheVariable("LoanAPI " + i, result);
             i++;
         }
-        System.out.println(methods.getCompareVariables());
+        Methods.logger.info(methods.getCompareVariables());
 
     }
 
@@ -67,14 +69,14 @@ public class MicroServices extends CalculatorServices {
 
         String result = calculateWithAPI("multiplies", amount, calculateWithAPI("adds", "1", calculateWithAPI("multiplies", time, rate)));
         methods.saveTheVariable(userVariable, result.replace(".0",""));
-        System.out.println(methods.getCompareVariables());
+        Methods.logger.info(methods.getCompareVariables());
 
     }
 
     public void calculateDailyExpensesWithAPI(String meal, String transportation, String coffee, String userVariable) {
         String result = calculateWithAPI("adds", calculateWithAPI("adds", meal, transportation), coffee);
         methods.saveTheVariable(userVariable, result.replace(".0",""));
-        System.out.println(methods.getCompareVariables());
+        Methods.logger.info(methods.getCompareVariables());
     }
 
     public void calculateExchangeRateWithAPI(String lira, String exchange, String userVariable) {
@@ -89,7 +91,7 @@ public class MicroServices extends CalculatorServices {
         }
         String result = calculateWithAPI("subtracts", calculateWithAPI("divides", lira, rate), calculateWithAPI("subtracts", "1", fee));
         methods.saveTheVariable(userVariable, result.replace(".0",""));
-        System.out.println(methods.getCompareVariables());
+        Methods.logger.info(methods.getCompareVariables());
     }
 
 
